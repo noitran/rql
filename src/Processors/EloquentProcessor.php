@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Noitran\RQL\Contracts\Expression\ExprInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
-use Noitran\RQL\Expressions\AndExpr;
 use Noitran\RQL\Expressions\OrExpr;
 use Noitran\RQL\ExprQueue;
 
@@ -31,13 +30,10 @@ class EloquentProcessor implements ProcessorInterface
         '$gt' => 'where',
         '$gte' => 'where',
         '$like' => 'where',
-
         '$in' => 'whereIn',
         '$notIn' => 'whereNotIn',
         '$between' => 'whereBetween',
-
         '$or' => null,
-        '$and' => null,
     ];
 
     /**
@@ -88,16 +84,8 @@ class EloquentProcessor implements ProcessorInterface
                 return $this->applyIfValueIsArray($exprClass);
             }
 
-//            if ($exprClass instanceof LikeExpr) {
-//                return $this->applyLike($exprClass);
-//            }
-
             if ($exprClass instanceof OrExpr) {
                 return $this->applyOr($exprClass);
-            }
-
-            if ($exprClass instanceof AndExpr) {
-                return $this->applyAnd($exprClass);
             }
         }
 
@@ -142,14 +130,14 @@ class EloquentProcessor implements ProcessorInterface
      */
     protected function applyOr(ExprInterface $exprClass): Builder
     {
-    }
+        return $this->getBuilder()->where(function (Builder $builder) use ($exprClass) {
+            $values = $exprClass->getValue();
 
-    /**
-     * @param ExprInterface $exprClass
-     *
-     * @return Builder
-     */
-    protected function applyAnd(ExprInterface $exprClass): Builder
-    {
+            foreach ($values as $value) {
+                $builder->orWhere($exprClass->getColumn(), $value);
+            }
+
+            return $builder;
+        });
     }
 }

@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Factory as EloquentFactory;
  */
 abstract class TestCase extends OrchestraTestCase
 {
-    use Reflections;
-
     /**
      * Setup the test environment.
      */
@@ -25,8 +23,6 @@ abstract class TestCase extends OrchestraTestCase
         $this->artisan('db:seed', [
             '--class' => PostTestSeeder::class,
         ]);
-
-        // $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
     }
 
     /**
