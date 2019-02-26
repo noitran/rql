@@ -19,6 +19,6 @@ class LikeExpr extends AbstractExpr
         parent::__construct($relation, $column, $value);
 
         $this->setExpression('$like');
-        $this->setOperator();
+        $this->setOperator('like');
     }
 }

@@ -107,4 +107,15 @@ abstract class AbstractExpr implements ExprInterface
     {
         return $this->operator;
     }
+
+    /**
+     * @param $delimiter
+     * @param $value
+     *
+     * @return array
+     */
+    protected function valueToArray($delimiter, $value): array
+    {
+        return explode($delimiter, $value);
+    }
 }

@@ -50,6 +50,7 @@ class EloquentProcessor implements ProcessorInterface
         '$lte',
         '$gt',
         '$gte',
+        '$like',
     ];
 
     /**
@@ -87,12 +88,16 @@ class EloquentProcessor implements ProcessorInterface
                 return $this->applyIfValueIsArray($exprClass);
             }
 
+//            if ($exprClass instanceof LikeExpr) {
+//                return $this->applyLike($exprClass);
+//            }
+
             if ($exprClass instanceof OrExpr) {
-                return $this->applyBetween($exprClass);
+                return $this->applyOr($exprClass);
             }
 
             if ($exprClass instanceof AndExpr) {
-                return $this->applyBetween($exprClass);
+                return $this->applyAnd($exprClass);
             }
         }
 
@@ -128,5 +133,23 @@ class EloquentProcessor implements ProcessorInterface
             $exprClass->getColumn(),
             $exprClass->getValue()
         );
+    }
+
+    /**
+     * @param ExprInterface $exprClass
+     *
+     * @return Builder
+     */
+    protected function applyOr(ExprInterface $exprClass): Builder
+    {
+    }
+
+    /**
+     * @param ExprInterface $exprClass
+     *
+     * @return Builder
+     */
+    protected function applyAnd(ExprInterface $exprClass): Builder
+    {
     }
 }

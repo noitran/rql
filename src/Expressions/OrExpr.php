@@ -2,6 +2,8 @@
 
 namespace Noitran\RQL\Expressions;
 
+use Noitran\RQL\Exceptions\ExpressionException;
+
 /**
  * Class OrExpr
  */
@@ -12,11 +14,27 @@ class OrExpr extends AbstractExpr
      *
      * @param string|null $relation
      * @param string $column
-     * @param mixed $value
+     * @param $value
+     *
+     * @throws ExpressionException
      */
     public function __construct(?string $relation, string $column, $value)
     {
-        parent::__construct($relation, $column, $value);
+        if (is_string($value)) {
+            $value = array_filter(
+                $this->valueToArray('|', trim($value))
+            );
+        }
+
+        if (count($value) < 2) {
+            throw new ExpressionException('The number of "values" must be greater than one');
+        }
+
+        parent::__construct(
+            $relation,
+            $column,
+            $value
+        );
 
         $this->setExpression('$or');
         $this->setOperator();

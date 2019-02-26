@@ -16,7 +16,11 @@ class BetweenExpr extends AbstractExpr
      */
     public function __construct(?string $relation, string $column, $value)
     {
-        parent::__construct($relation, $column, $value);
+        parent::__construct(
+            $relation,
+            $column,
+            $this->valueToArray(',', $value)
+        );
 
         $this->setExpression('$between');
         $this->setOperator();
