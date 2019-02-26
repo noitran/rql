@@ -16,8 +16,9 @@ interface QueueInterface
      *
      * @param AbstractExpr $exprClass
      *
-     * @return ExprQueue
      * @throws ExpressionException
+     *
+     * @return ExprQueue
      */
     public function enqueue($exprClass): ExprQueue;
 }

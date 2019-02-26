@@ -2,13 +2,9 @@
 
 namespace Noitran\RQL\Tests;
 
-use Noitran\RQL\Tests\Stubs\Models\Comment;
 use Noitran\RQL\Tests\Stubs\Models\User;
-use Noitran\RQL\Tests\Stubs\Models\Post;
-use Noitran\RQL\Tests\Stubs\Models\Tag;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
-use Illuminate\Support\Collection;
 
 class PostTestSeeder extends Seeder
 {
