@@ -9,6 +9,11 @@ build:
       - vendor/
       - ~/.composer/cache/
   dependencies:
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
   tests:
     override:
       -
