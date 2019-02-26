@@ -3,8 +3,10 @@
 namespace Noitran\RQL\Tests\Stubs\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class User
+ */
 class User extends Model
 {
     /**
@@ -15,20 +17,4 @@ class User extends Model
     protected $guarded = [
         'id',
     ];
-
-    /**
-     * @return HasMany
-     */
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class);
-    }
 }

@@ -9,11 +9,6 @@ build:
       - vendor/
       - ~/.composer/cache/
   dependencies:
-  nodes:
-    analysis:
-      tests:
-        override:
-          - php-scrutinizer-run
   tests:
     override:
       -
@@ -21,3 +16,8 @@ build:
         coverage:
           file: clover.xml
           format: clover
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
