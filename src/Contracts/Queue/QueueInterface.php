@@ -4,7 +4,7 @@ namespace Noitran\RQL\Contracts\Queue;
 
 use Noitran\RQL\Exceptions\ExpressionException;
 use Noitran\RQL\Expressions\AbstractExpr;
-use Noitran\RQL\ExprQueue;
+use Noitran\RQL\Queues\ExprQueue;
 
 /**
  * Interface QueueInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Noitran\RQL;
+namespace Noitran\RQL\Queues;
 
 use Noitran\RQL\Expressions\AbstractExpr;
 use SplQueue;

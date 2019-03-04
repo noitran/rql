@@ -103,7 +103,7 @@ abstract class AbstractExpr implements ExprInterface
     /**
      * @inheritdoc
      */
-    public function getOperator(): string
+    public function getOperator(): ?string
     {
         return $this->operator;
     }

@@ -2,7 +2,7 @@
 
 namespace Noitran\RQL\Contracts\Processor;
 
-use Noitran\RQL\ExprQueue;
+use Noitran\RQL\Queues\ExprQueue;
 
 /**
  * Interface ProcessorInterface

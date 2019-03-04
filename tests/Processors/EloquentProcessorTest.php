@@ -3,9 +3,10 @@
 namespace Noitran\RQL\Tests\Processors;
 
 use Illuminate\Database\Eloquent\Builder;
+use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Expressions\AbstractExpr;
-use Noitran\RQL\ExprQueue;
-use Noitran\RQL\Processors\EloquentProcessor;
+use Noitran\RQL\Processors\Eloquent\EloquentProcessor;
+use Noitran\RQL\Queues\ExprQueue;
 use Noitran\RQL\Tests\Stubs\Models\User;
 use Noitran\RQL\Tests\TestCase;
 
@@ -61,12 +62,36 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
+    public function itShouldTestUsingRQLHelperFunction(): void
+    {
+        $exprClasses = $this->queue->enqueue(
+            $this->createExprClass('between', 'id', '2,5')
+        );
+
+        $query = rql()->getProcessor()
+            ->setBuilder($this->builder)
+            ->process($exprClasses);
+
+        $this->assertEquals(
+            'select * from "users" where "id" between ? and ?',
+            $query->toSql()
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @throws \Noitran\RQL\Exceptions\ExpressionException
+     */
     public function itShouldTestExprBetween(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('between', 'id', '2,5')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" between ? and ?',
@@ -84,7 +109,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('eq', 'name', 'John')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" = ?',
@@ -102,7 +130,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('gte', 'updated_at', '2019-01-01 14:00:23')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" >= ?',
@@ -120,7 +151,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('gt', 'updated_at', '2019-01-01 14:00:23')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" > ?',
@@ -138,7 +172,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('in', 'id', '2,5,6,227')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" in (?, ?, ?, ?)',
@@ -156,7 +193,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('like', 'name', '%RandomName%')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" like ?',
@@ -174,7 +214,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('lte', 'updated_at', '2019-01-01 14:00:23')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" <= ?',
@@ -192,7 +235,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('lt', 'updated_at', '2019-01-01 14:00:23')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" < ?',
@@ -210,7 +256,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('notEq', 'name', 'John')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" != ?',
@@ -228,7 +277,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('notIn', 'id', '2,5,6,227')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" not in (?, ?, ?, ?)',
@@ -246,7 +298,10 @@ class EloquentProcessorTest extends TestCase
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('or', 'id', '2|5|6')
         );
-        $query = (new EloquentProcessor($this->builder))->process($exprClasses);
+
+        /** @var EloquentProcessor $processor */
+        $processor = $this->app->make(ProcessorInterface::class);
+        $query = $processor->setBuilder($this->builder)->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where ("id" = ? or "id" = ? or "id" = ?)',

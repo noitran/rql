@@ -2,6 +2,7 @@
 
 namespace Noitran\RQL\Tests;
 
+use Noitran\RQL\ServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
@@ -23,6 +24,18 @@ abstract class TestCase extends OrchestraTestCase
         $this->artisan('db:seed', [
             '--class' => PostTestSeeder::class,
         ]);
+    }
+
+    /**
+     * @param \Laravel\Lumen\Application $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app): array
+    {
+        return [
+            ServiceProvider::class,
+        ];
     }
 
     /**

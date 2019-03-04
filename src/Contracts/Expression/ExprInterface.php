@@ -44,7 +44,7 @@ interface ExprInterface
     public function setOperator(string $operator = null): AbstractExpr;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOperator(): string;
+    public function getOperator(): ?string;
 }
