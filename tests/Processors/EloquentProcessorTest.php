@@ -26,14 +26,20 @@ class EloquentProcessorTest extends TestCase
     protected $builder;
 
     /**
+     * @var EloquentProcessor
+     */
+    protected $processor;
+
+    /**
      * Setup the test environment.
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->builder = User::query();
         $this->queue = new ExprQueue();
+        $this->builder = User::query();
+        $this->processor = $this->app->make(ProcessorInterface::class)->setBuilder($this->builder);
     }
 
     public function tearDown(): void
@@ -90,8 +96,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" between ? and ?',
@@ -111,8 +116,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" = ?',
@@ -132,8 +136,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" >= ?',
@@ -153,8 +156,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" > ?',
@@ -174,8 +176,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" in (?, ?, ?, ?)',
@@ -195,8 +196,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" like ?',
@@ -216,8 +216,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" <= ?',
@@ -237,8 +236,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "updated_at" < ?',
@@ -258,8 +256,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "name" != ?',
@@ -279,8 +276,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where "id" not in (?, ?, ?, ?)',
@@ -300,8 +296,7 @@ class EloquentProcessorTest extends TestCase
         );
 
         /** @var EloquentProcessor $processor */
-        $processor = $this->app->make(ProcessorInterface::class);
-        $query = $processor->setBuilder($this->builder)->process($exprClasses);
+        $query = $this->processor->process($exprClasses);
 
         $this->assertEquals(
             'select * from "users" where ("id" = ? or "id" = ? or "id" = ?)',

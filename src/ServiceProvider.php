@@ -3,9 +3,7 @@
 namespace Noitran\RQL;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
-use Noitran\RQL\Factories\Factory;
 use Noitran\RQL\Services\RQLService;
 
 /**
@@ -29,7 +27,6 @@ class ServiceProvider extends IlluminateServiceProvider
     public function register(): void
     {
         $this->registerConfig();
-        $this->registerFactory();
         $this->registerService();
         $this->bindProcessor();
     }
@@ -64,18 +61,6 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $configPath = __DIR__ . '/../config/rql.php';
         $this->mergeConfigFrom($configPath, 'rql');
-    }
-
-    /**
-     * Bind RQL Factory
-     *
-     * @return void
-     */
-    protected function registerFactory(): void
-    {
-        $this->app->singleton(Factory::class, function (Application $app) {
-            return new Factory($app);
-        });
     }
 
     /**
