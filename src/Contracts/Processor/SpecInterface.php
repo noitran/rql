@@ -4,7 +4,7 @@ namespace Noitran\RQL\Contracts\Processor;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
 
-interface ApplicableInterface
+interface SpecInterface
 {
     /**
      * @param ProcessorInterface $processor
@@ -12,7 +12,7 @@ interface ApplicableInterface
      *
      * @return bool
      */
-    public function supports(ProcessorInterface $processor, ExprInterface $exprClass): bool;
+    public function isSatisfiedBy(ProcessorInterface $processor, ExprInterface $exprClass): bool;
 
     /**
      * @param ProcessorInterface $processor

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Noitran\RQL\Contracts\Expression\ExprInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
-use Noitran\RQL\Processors\FilterStrategyResolver;
+use Noitran\RQL\Processors\FilterSpecResolver;
 use Noitran\RQL\Queues\ExprQueue;
 
 /**
@@ -21,7 +21,7 @@ class EloquentProcessor implements ProcessorInterface
     protected $builder;
 
     /**
-     * @var FilterStrategyResolver
+     * @var FilterSpecResolver
      */
     protected $resolver;
 
@@ -74,9 +74,9 @@ class EloquentProcessor implements ProcessorInterface
     /**
      * EloquentProcessor constructor.
      *
-     * @param FilterStrategyResolver $resolver
+     * @param FilterSpecResolver $resolver
      */
-    public function __construct(FilterStrategyResolver $resolver)
+    public function __construct(FilterSpecResolver $resolver)
     {
         $this->resolver = $resolver;
     }

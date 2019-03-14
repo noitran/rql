@@ -22,7 +22,7 @@ return [
             /*
              * List of strategies how expressions will be applied
              */
-            'filter_strategies' => [
+            'filter_specs' => [
                 \Noitran\RQL\Processors\Eloquent\ApplyComparison::class,
                 \Noitran\RQL\Processors\Eloquent\ApplyIfArray::class,
                 \Noitran\RQL\Processors\Eloquent\ApplyOr::class,

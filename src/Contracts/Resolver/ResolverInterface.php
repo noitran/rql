@@ -3,7 +3,7 @@
 namespace Noitran\RQL\Contracts\Resolver;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
-use Noitran\RQL\Contracts\Processor\ApplicableInterface;
+use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
 
@@ -32,7 +32,7 @@ interface ResolverInterface
      *
      * @throws ExpressionException
      *
-     * @return ApplicableInterface
+     * @return SpecInterface
      */
-    public function resolve(ProcessorInterface $processor, ExprInterface $exprClass): ApplicableInterface;
+    public function resolve(ProcessorInterface $processor, ExprInterface $exprClass): SpecInterface;
 }

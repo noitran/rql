@@ -6,7 +6,7 @@ use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Illuminate\Contracts\Config\Repository as Config;
 use Noitran\RQL\Contracts\Resolver\ResolverInterface;
 use Noitran\RQL\Exceptions\RuntimeException;
-use Noitran\RQL\Processors\FilterStrategyResolver;
+use Noitran\RQL\Processors\FilterSpecResolver;
 
 /**
  * Class RQLService
@@ -57,7 +57,7 @@ class RQLService
             throw new RuntimeException('Processor class "' . $class . '" does not exist!');
         }
 
-        $resolver = $this->createFilterStrategyResolver($this->getConfig($name));
+        $resolver = $this->createFilterSpecResolver($this->getConfig($name));
 
         return new $class($resolver);
     }
@@ -67,10 +67,10 @@ class RQLService
      *
      * @return ResolverInterface
      */
-    protected function createFilterStrategyResolver(array $config): ResolverInterface
+    protected function createFilterSpecResolver(array $config): ResolverInterface
     {
-        return (new FilterStrategyResolver())
-            ->registerAll($config['filter_strategies']);
+        return (new FilterSpecResolver())
+            ->registerAll($config['filter_specs']);
     }
 
     /**

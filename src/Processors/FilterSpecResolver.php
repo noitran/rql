@@ -3,25 +3,25 @@
 namespace Noitran\RQL\Processors;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
-use Noitran\RQL\Contracts\Processor\ApplicableInterface;
+use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Contracts\Resolver\ResolverInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
 
-class FilterStrategyResolver implements ResolverInterface
+class FilterSpecResolver implements ResolverInterface
 {
     /**
-     * @var ApplicableInterface[]
+     * @var SpecInterface[]
      */
-    protected $applicableStrategies = [];
+    protected $applicableSpecs = [];
 
     /**
      * @inheritdoc
      */
-    public function registerAll(array $filterStrategies): self
+    public function registerAll(array $filterSpecs): self
     {
-        foreach ($filterStrategies as $strategy) {
-            $this->register($strategy);
+        foreach ($filterSpecs as $spec) {
+            $this->register($spec);
         }
 
         return $this;
@@ -32,7 +32,7 @@ class FilterStrategyResolver implements ResolverInterface
      */
     public function register(string $filterStrategy): self
     {
-        $this->applicableStrategies[] = new $filterStrategy();
+        $this->applicableSpecs[] = new $filterStrategy();
 
         return $this;
     }
@@ -40,11 +40,11 @@ class FilterStrategyResolver implements ResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve(ProcessorInterface $processor, ExprInterface $exprClass): ApplicableInterface
+    public function resolve(ProcessorInterface $processor, ExprInterface $exprClass): SpecInterface
     {
-        foreach ($this->applicableStrategies as $strategy) {
-            if ($strategy->supports($processor, $exprClass)) {
-                return $strategy;
+        foreach ($this->applicableSpecs as $spec) {
+            if ($spec->isSatisfiedBy($processor, $exprClass)) {
+                return $spec;
             }
         }
 

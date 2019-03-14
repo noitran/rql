@@ -4,18 +4,18 @@ namespace Noitran\RQL\Processors\Eloquent;
 
 use Illuminate\Database\Eloquent\Builder;
 use Noitran\RQL\Contracts\Expression\ExprInterface;
-use Noitran\RQL\Contracts\Processor\ApplicableInterface;
+use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 
 /**
  * Class ApplyIfArray
  */
-class ApplyIfArray implements ApplicableInterface
+class ApplyIfArray implements SpecInterface
 {
     /**
      * @inheritdoc
      */
-    public function supports(ProcessorInterface $processor, ExprInterface $exprClass): bool
+    public function isSatisfiedBy(ProcessorInterface $processor, ExprInterface $exprClass): bool
     {
         if (! in_array($exprClass->getExpression(), ['$in', '$notIn', '$between'], true)) {
             return false;
