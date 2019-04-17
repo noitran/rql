@@ -1,12 +1,13 @@
 <?php
 
-namespace {
+declare(strict_types=1);
 
+namespace {
     use Noitran\RQL\Services\RQLService;
 
     if (! function_exists('rql')) {
         /**
-         * Get default RQL service
+         * Get default RQL service.
          *
          * @throws RuntimeException
          *

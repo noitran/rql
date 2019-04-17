@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Processors\Eloquent;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +13,7 @@ use Noitran\RQL\Processors\FilterSpecResolver;
 use Noitran\RQL\Queues\ExprQueue;
 
 /**
- * Class EloquentProcessor
+ * Class EloquentProcessor.
  */
 class EloquentProcessor implements ProcessorInterface
 {
@@ -111,7 +113,7 @@ class EloquentProcessor implements ProcessorInterface
     public function process(ExprQueue $exprClasses): Builder
     {
         foreach ($exprClasses as $exprClass) {
-            /** @var ExprInterface $exprClass */
+            /* @var ExprInterface $exprClass */
             $this->builder = $this->resolver
                 ->resolve($this, $exprClass)
                 ->apply($this, $exprClass);

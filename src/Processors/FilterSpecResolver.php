@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Processors;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
-use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
+use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Resolver\ResolverInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
 
@@ -16,7 +18,7 @@ class FilterSpecResolver implements ResolverInterface
     protected $applicableSpecs = [];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function registerAll(array $filterSpecs): self
     {
@@ -28,7 +30,7 @@ class FilterSpecResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function register(string $filterStrategy): self
     {
@@ -38,7 +40,7 @@ class FilterSpecResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(ProcessorInterface $processor, ExprInterface $exprClass): SpecInterface
     {
@@ -49,7 +51,7 @@ class FilterSpecResolver implements ResolverInterface
         }
 
         throw new ExpressionException(
-            'Can\'t find how to apply operator defined in class: ' . get_class($exprClass)
+            'Can\'t find how to apply operator defined in class: ' . \get_class($exprClass)
         );
     }
 }

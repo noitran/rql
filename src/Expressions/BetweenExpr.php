@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Expressions;
 
 /**
- * Class BetweenExpr
+ * Class BetweenExpr.
  */
 class BetweenExpr extends AbstractExpr
 {

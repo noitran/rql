@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Contracts\Expression;
 
 use Noitran\RQL\Expressions\AbstractExpr;
 
 /**
- * Interface ExprInterface
+ * Interface ExprInterface.
  */
 interface ExprInterface
 {

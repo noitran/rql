@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Contracts\Processor;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;

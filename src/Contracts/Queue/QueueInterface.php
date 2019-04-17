@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Contracts\Queue;
 
 use Noitran\RQL\Exceptions\ExpressionException;
@@ -7,7 +9,7 @@ use Noitran\RQL\Expressions\AbstractExpr;
 use Noitran\RQL\Queues\ExprQueue;
 
 /**
- * Interface QueueInterface
+ * Interface QueueInterface.
  */
 interface QueueInterface
 {

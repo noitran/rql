@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Tests\Stubs\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class User
+ * Class User.
  */
 class User extends Model
 {

@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Contracts\Resolver;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
-use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Contracts\Processor\ProcessorInterface;
+use Noitran\RQL\Contracts\Processor\SpecInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
 
 /**
- * Interface ResolverInterface
+ * Interface ResolverInterface.
  */
 interface ResolverInterface
 {

@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Services;
 
-use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Illuminate\Contracts\Config\Repository as Config;
+use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Contracts\Resolver\ResolverInterface;
 use Noitran\RQL\Exceptions\RuntimeException;
 use Noitran\RQL\Processors\FilterSpecResolver;
 
 /**
- * Class RQLService
+ * Class RQLService.
  */
 class RQLService
 {

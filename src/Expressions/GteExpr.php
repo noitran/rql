@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Expressions;
 
 /**
- * Class GteExpr
+ * Class GteExpr.
  */
 class GteExpr extends AbstractExpr
 {

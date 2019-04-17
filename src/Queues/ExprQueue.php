@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Queues;
 
-use Noitran\RQL\Expressions\AbstractExpr;
-use SplQueue;
 use Noitran\RQL\Contracts\Expression\ExprInterface;
 use Noitran\RQL\Contracts\Queue\QueueInterface;
 use Noitran\RQL\Exceptions\ExpressionException;
+use Noitran\RQL\Expressions\AbstractExpr;
+use SplQueue;
 
 class ExprQueue extends SplQueue implements QueueInterface
 {
@@ -17,7 +19,7 @@ class ExprQueue extends SplQueue implements QueueInterface
      *
      * @return ExprQueue
      */
-    public function enqueue($exprClass): ExprQueue
+    public function enqueue($exprClass): self
     {
         if (! $exprClass instanceof ExprInterface) {
             throw new ExpressionException(sprintf(

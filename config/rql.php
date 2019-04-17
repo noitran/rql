@@ -1,6 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 return [
+    /*
+     * RQL query parser settings
+     */
+    'parsers' => [
+        /*
+         * Name of http query parameter that Request parsers should search for RQL string
+         */
+        'default_query_parameter' => 'filter',
+    ],
 
     /*
      * Currently available only laravel's eloquent ORM
@@ -11,9 +22,7 @@ return [
      * List of available ORM processors
      */
     'processors' => [
-
         'eloquent' => [
-
             /*
              * Processor handler class that implements ProcessorInterface
              */
@@ -26,7 +35,9 @@ return [
                 \Noitran\RQL\Processors\Eloquent\ApplyComparison::class,
                 \Noitran\RQL\Processors\Eloquent\ApplyIfArray::class,
                 \Noitran\RQL\Processors\Eloquent\ApplyOr::class,
-                // \Noitran\RQL\Processors\Eloquent\ApplyBetween::class, // ApplyIfArray is used by default
+
+                // ApplyIfArray is used by default
+                // \Noitran\RQL\Processors\Eloquent\ApplyBetween::class,
             ],
         ],
     ],

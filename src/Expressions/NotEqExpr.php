@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Expressions;
 
 /**
- * Class NotEqExpr
+ * Class NotEqExpr.
  */
 class NotEqExpr extends AbstractExpr
 {

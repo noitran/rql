@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Expressions;
 
 use Noitran\RQL\Contracts\Expression\ExprInterface;
 
 /**
- * Class AbstractExpr
+ * Class AbstractExpr.
  */
 abstract class AbstractExpr implements ExprInterface
 {
@@ -49,7 +51,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRelation(): ?string
     {
@@ -57,7 +59,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getColumn(): string
     {
@@ -65,7 +67,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getValue()
     {
@@ -73,7 +75,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setExpression(string $expression = null): self
     {
@@ -83,7 +85,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getExpression(): string
     {
@@ -91,7 +93,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setOperator(string $operator = null): self
     {
@@ -101,7 +103,7 @@ abstract class AbstractExpr implements ExprInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getOperator(): ?string
     {

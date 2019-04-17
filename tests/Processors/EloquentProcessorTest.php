@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Noitran\RQL\Tests\Processors;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +13,7 @@ use Noitran\RQL\Tests\Stubs\Models\User;
 use Noitran\RQL\Tests\TestCase;
 
 /**
- * Class EloquentProcessorTest
+ * Class EloquentProcessorTest.
  */
 class EloquentProcessorTest extends TestCase
 {
@@ -68,7 +70,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestUsingRQLHelperFunction(): void
+    public function it_should_test_using_rQLHelper_function(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('between', 'id', '2,5')
@@ -89,7 +91,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprBetween(): void
+    public function it_should_test_expr_between(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('between', 'id', '2,5')
@@ -109,7 +111,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprEq(): void
+    public function it_should_test_expr_eq(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('eq', 'name', 'John')
@@ -129,7 +131,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprGte(): void
+    public function it_should_test_expr_gte(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('gte', 'updated_at', '2019-01-01 14:00:23')
@@ -149,7 +151,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprGt(): void
+    public function it_should_test_expr_gt(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('gt', 'updated_at', '2019-01-01 14:00:23')
@@ -169,7 +171,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprIn(): void
+    public function it_should_test_expr_in(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('in', 'id', '2,5,6,227')
@@ -189,7 +191,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprLike(): void
+    public function it_should_test_expr_like(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('like', 'name', '%RandomName%')
@@ -209,7 +211,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprLte(): void
+    public function it_should_test_expr_lte(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('lte', 'updated_at', '2019-01-01 14:00:23')
@@ -229,7 +231,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprLt(): void
+    public function it_should_test_expr_lt(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('lt', 'updated_at', '2019-01-01 14:00:23')
@@ -249,7 +251,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprNotEq(): void
+    public function it_should_test_expr_not_eq(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('notEq', 'name', 'John')
@@ -269,7 +271,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprNotIn(): void
+    public function it_should_test_expr_not_in(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('notIn', 'id', '2,5,6,227')
@@ -289,7 +291,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function itShouldTestExprOr(): void
+    public function it_should_test_expr_or(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('or', 'id', '2|5|6')
