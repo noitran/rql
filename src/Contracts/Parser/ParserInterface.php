@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Noitran\RQL\Contracts\Parser;
 
-use Noitran\RQL\Parsers\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Interface ParserInterface.
@@ -12,7 +12,7 @@ use Noitran\RQL\Parsers\Model;
 interface ParserInterface
 {
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function parse(): Model;
+    public function parse(): Collection;
 }

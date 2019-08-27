@@ -37,7 +37,7 @@ class Model
     /**
      * @return string
      */
-    public function getRelation(): string
+    public function getRelation(): ?string
     {
         return $this->relation;
     }
@@ -47,7 +47,7 @@ class Model
      *
      * @return Model
      */
-    public function setRelation(string $relation): self
+    public function setRelation(?string $relation): self
     {
         $this->relation = $relation;
 

@@ -9,6 +9,7 @@ use Noitran\RQL\Contracts\Processor\ProcessorInterface;
 use Noitran\RQL\Expressions\AbstractExpr;
 use Noitran\RQL\Processors\Eloquent\EloquentProcessor;
 use Noitran\RQL\Queues\ExprQueue;
+use function Noitran\RQL\rql;
 use Noitran\RQL\Tests\Stubs\Models\User;
 use Noitran\RQL\Tests\TestCase;
 
@@ -70,7 +71,7 @@ class EloquentProcessorTest extends TestCase
      *
      * @throws \Noitran\RQL\Exceptions\ExpressionException
      */
-    public function it_should_test_using_rQLHelper_function(): void
+    public function it_should_test_using_r_qLHelper_function(): void
     {
         $exprClasses = $this->queue->enqueue(
             $this->createExprClass('between', 'id', '2,5')

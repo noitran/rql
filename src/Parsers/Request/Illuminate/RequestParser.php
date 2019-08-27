@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Noitran\RQL\Parsers\Request\Illuminate;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Noitran\RQL\Exceptions\RuntimeException;
 use Noitran\RQL\Parsers\AbstractParser;
 use Noitran\RQL\Parsers\Model;
+use function in_array;
 
 /**
  * Class RequestParser.
@@ -66,9 +68,17 @@ class RequestParser extends AbstractParser
     }
 
     /**
+     * @return string
+     */
+    public function getQueryParameterName(): string
+    {
+        return $this->queryParameterName;
+    }
+
+    /**
      * @return string|array|null
      */
-    public function getQueryParameter()
+    public function getQueryValue()
     {
         return $this->request->input($this->queryParameterName);
     }
@@ -76,17 +86,25 @@ class RequestParser extends AbstractParser
     /**
      * @return mixed
      */
-    public function parse(): Model
+    public function parse(): Collection
     {
-        $model = new Model();
+        $input = $this->getQueryValue();
+        $collection = collect();
 
-        $model->setRelation($this->parseRelation($this->filterParameter));
-        $model->setField($this->parseColumn($this->filterParameter));
-        $model->setExpression($this->parseExpression($this->filterValue));
-        $model->setDataType($this->parseDataType($this->filterValue));
-        $model->setValue($this->parseValue($this->filterValue));
+        foreach ($input as $key => $item) {
+            $model = new Model();
 
-        return $model;
+            $model->setRelation($this->parseRelation($key))
+                ->setField($this->parseColumn($key))
+                ->setExpression($this->parseExpression($item))
+                ->setDataType($this->parseDataType($item))
+                ->setValue($this->parseValue($item))
+            ;
+
+            $collection->push($model);
+        }
+
+        return $collection;
     }
 
     /**
@@ -128,8 +146,8 @@ class RequestParser extends AbstractParser
      */
     protected function parseExpression($filterValue): string
     {
-        if (! \is_array($filterValue)) {
-            return config('repositories.filtering.default_expression', '$eq');
+        if (! is_array($filterValue)) {
+            return config('rql.filtering.default_expression', '$eq');
         }
 
         return key($filterValue);
@@ -152,13 +170,13 @@ class RequestParser extends AbstractParser
             $parsedDataType = substr($value, 0, $lastColonPosition);
 
             if (! $this->isValidDataType($parsedDataType)) {
-                return config('repositories.filtering.default_data_type', '$string');
+                return config('rql.filtering.default_data_type', '$string');
             }
 
             return $parsedDataType;
         }
 
-        return config('repositories.filtering.default_data_type', '$string');
+        return config('rql.filtering.default_data_type', '$string');
     }
 
     /**
@@ -186,7 +204,7 @@ class RequestParser extends AbstractParser
      */
     private function extractValue($filterValue): string
     {
-        if (! \is_array($filterValue)) {
+        if (! is_array($filterValue)) {
             return $filterValue;
         }
 
@@ -203,9 +221,9 @@ class RequestParser extends AbstractParser
      */
     private function isValidDataType($dataType, $strict = false): bool
     {
-        if (! \in_array($dataType, config('repositories.filtering.allowed_data_types', '$string'), true)) {
+        if (! in_array($dataType, config('rql.filtering.allowed_data_types', ['$string']), true)) {
             if ($strict) {
-                throw new RuntimeException('Invalid/Unallowed data type passed.');
+                throw new RuntimeException('Invalid/Not allowed data type passed.');
             }
 
             return false;
