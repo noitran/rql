@@ -68,11 +68,11 @@ class RequestParserTest extends TestCase
         $request->replace([
             'filter' => [
                 'profile.name' => [
-                    '$eq' => 'John'
+                    '$eq' => 'John',
                 ],
                 'profile.surname' => [
                     '$like' => '%Doe%',
-                ]
+                ],
             ],
         ]);
 

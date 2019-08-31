@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Noitran\RQL\Exceptions\RuntimeException;
 use Noitran\RQL\Parsers\AbstractParser;
 use Noitran\RQL\Parsers\Model;
-use function in_array;
 
 /**
  * Class RequestParser.
@@ -146,7 +145,7 @@ class RequestParser extends AbstractParser
      */
     protected function parseExpression($filterValue): string
     {
-        if (! is_array($filterValue)) {
+        if (! \is_array($filterValue)) {
             return config('rql.filtering.default_expression', '$eq');
         }
 
@@ -204,7 +203,7 @@ class RequestParser extends AbstractParser
      */
     private function extractValue($filterValue): string
     {
-        if (! is_array($filterValue)) {
+        if (! \is_array($filterValue)) {
             return $filterValue;
         }
 
@@ -221,7 +220,7 @@ class RequestParser extends AbstractParser
      */
     private function isValidDataType($dataType, $strict = false): bool
     {
-        if (! in_array($dataType, config('rql.filtering.allowed_data_types', ['$string']), true)) {
+        if (! \in_array($dataType, config('rql.filtering.allowed_data_types', ['$string']), true)) {
             if ($strict) {
                 throw new RuntimeException('Invalid/Not allowed data type passed.');
             }

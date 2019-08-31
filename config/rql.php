@@ -42,7 +42,6 @@ return [
         ],
     ],
 
-
     /*
      * Request filters that will be applied by default, allowing to use them in each query
      */
