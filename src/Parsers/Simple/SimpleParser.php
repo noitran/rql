@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Noitran\RQL\Parsers\Request\Illuminate;
+namespace Noitran\RQL\Parsers\Simple;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -11,19 +11,19 @@ use Noitran\RQL\Parsers\AbstractParser;
 /**
  * Class RequestParser.
  */
-class RequestParser extends AbstractParser
+class SimpleParser extends AbstractParser
 {
     /**
-     * @var Request
+     * @var array
      */
     protected $request;
 
     /**
-     * RequestParser constructor.
+     * SimpleParser constructor.
      *
-     * @param Request $request
+     * @param array $request
      */
-    public function __construct(Request $request)
+    public function __construct(array $request)
     {
         $this->request = $request;
 
@@ -31,19 +31,11 @@ class RequestParser extends AbstractParser
     }
 
     /**
-     * @return array
-     */
-    public function getAttributes(): array
-    {
-        return $this->request->toArray();
-    }
-
-    /**
      * @return string|array|null
      */
     public function getQueryValue()
     {
-        return $this->request->input($this->getQueryParameterName());
+        return $this->request[$this->getQueryParameterName()];
     }
 
     /**
