@@ -15,10 +15,8 @@ class SimpleParserTest extends TestCase
     public function it_should_parse_request(): void
     {
         $request = [
-            'filter' => [
-                'name' => 'John',
-                'surname' => 'Doe',
-            ],
+            'name' => 'John',
+            'surname' => 'Doe',
         ];
 
         $collection = (new SimpleParser($request))->parse();
@@ -37,10 +35,8 @@ class SimpleParserTest extends TestCase
     public function it_should_get_relation_and_column_name(): void
     {
         $request = [
-            'filter' => [
-                'profile.name' => 'John',
-                'profile.surname' => 'Doe',
-            ],
+            'profile.name' => 'John',
+            'profile.surname' => 'Doe',
         ];
 
         $collection = (new SimpleParser($request))->parse();

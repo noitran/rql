@@ -35,7 +35,7 @@ class SimpleParser extends AbstractParser
      */
     public function getQueryValue()
     {
-        return $this->request[$this->getQueryParameterName()];
+        return $this->request;
     }
 
     /**
